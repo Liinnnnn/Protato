@@ -21,7 +21,7 @@ public class WeaponSelectionContainer : MonoBehaviour
         configureStatsContainer(calc);
         
         icon.sprite =sprite;
-        Wname.text = name + " " + level;
+        Wname.text = name + " LV." + (level + 1);
         Color imgColor = ColorHolder.getColor(level);
         Wname.color = imgColor;
         levelImage.color = imgColor;

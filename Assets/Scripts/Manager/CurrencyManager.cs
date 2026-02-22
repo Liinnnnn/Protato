@@ -88,7 +88,7 @@ public class CurrencyManager : MonoBehaviour
     // }
     private void CollectCoins(Coins coins)
     {
-        AddCurrency(1);
+        AddCurrency(10);
     }
     // private void CollectDiamond(Diamond diamond)
     // {

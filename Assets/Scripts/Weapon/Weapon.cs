@@ -30,7 +30,7 @@ public abstract class Weapon : MonoBehaviour,IPlayerStats
     {
         if(!AudioManager.instance.isSfxOn) return;
         audioSource.Play();
-        audioSource.pitch = Random.Range(0.95f,1.05f);
+        audioSource.pitch = Random.Range(0.9f,1.05f);
     }
     protected Enemy GetClosestEnemy()
     {

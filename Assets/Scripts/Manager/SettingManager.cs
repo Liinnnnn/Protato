@@ -41,15 +41,12 @@ public class SettingManager : MonoBehaviour
         updateSfxVisuals();
         updateMusicVisuals();
     }
-    private void Save(string id,bool state)
-    {
-        PlayerPrefs.SetInt(id, state ? 1 :0);
-    }
+    
     private void musicButtonClickCallback()
     {
         musicState = !musicState;
         updateMusicVisuals();
-        Save("MUSIC",musicState);
+        SaveManager.instance.Save("MUSIC",musicState,Type.BUTTON);
         onMusicChanged?.Invoke(musicState);
     }
 
@@ -57,7 +54,7 @@ public class SettingManager : MonoBehaviour
     {   
         sfxState = !sfxState;
         updateSfxVisuals();
-        Save("SFX",sfxState);
+        SaveManager.instance.Save("SFX",sfxState,Type.BUTTON);
         onSfxChanged?.Invoke(sfxState);
     }
     private void updateMusicVisuals()

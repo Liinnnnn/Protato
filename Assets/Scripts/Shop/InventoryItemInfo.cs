@@ -17,7 +17,7 @@ public class InventoryItemInfo : MonoBehaviour
     [Header("Button")]
 
     [field : SerializeField] public Button recycle{get;private set;}
-    [field : SerializeField] public Button merge{get;private set;}
+    // [field : SerializeField] public Button merge{get;private set;}
 
     public void Configure(Weapon w)
     {
@@ -27,17 +27,17 @@ public class InventoryItemInfo : MonoBehaviour
         ColorHolder.getColor(w.Level),
         WeaponStatsCalculated.GetStats(w.weaponData,(float) w.Level)
         );
-        merge.gameObject.SetActive(true);
+        // merge.gameObject.SetActive(true);
 
         // merge.interactable = WeaponMerge.instance.CanMerge(w);
-        merge.interactable = false;
+        // merge.interactable = false;
         // merge.onClick.RemoveAllListeners();
-        merge.onClick.AddListener(() => WeaponMerge.instance.Merge());
+        // merge.onClick.AddListener(() => WeaponMerge.instance.Merge());
     }
     public void Configure(ObjectDataSO w)
     {
         
-        merge.gameObject.SetActive(false);
+        // merge.gameObject.SetActive(false);
         configure(w.icon,
         w.name,
         w.sellPrice,

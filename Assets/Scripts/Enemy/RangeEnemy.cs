@@ -8,6 +8,9 @@ public class RangeEnemy : MonoBehaviour
     private RangedAttack rangedAttack;
     [Header("General Settings")]
     [SerializeField] private float speed = 3.0f;
+    public float detectionDistance = 1.5f; 
+    public float obstacleAvoidanceWeight = 2.0f; // Độ ưu tiên né vật cản
+    public LayerMask obstacleLayer;
 
     [Header("Ranged Enemy Settings")]
     [SerializeField] private float rangePlayerDetectionRange = 10f;
@@ -45,10 +48,31 @@ public class RangeEnemy : MonoBehaviour
    
     private void MoveTowardsPlayer()
     {
-        Vector2 direction = (player.transform.position - transform.position).normalized;
-        rangedAttack.Flip(direction);
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        Vector2 targetPos = player.getCenter();
+        Vector2 currentPos = transform.position;
+        
+        Vector2 moveDirection = (targetPos - currentPos).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(currentPos, moveDirection, detectionDistance, obstacleLayer);
+        
+        if (hit.collider != null) {
+            Vector2 avoidDirection = Vector2.Perpendicular(hit.normal); 
+            
+            if (Vector2.Dot(avoidDirection, moveDirection) < 0) {
+                avoidDirection = -avoidDirection;
+            }
+
+            moveDirection = (moveDirection + avoidDirection * obstacleAvoidanceWeight).normalized;
+        }
+
+        Vector2 newPosition = (Vector2)transform.position + (moveDirection * speed * Time.deltaTime);
+
+        rangedAttack.Flip(moveDirection);
+
         transform.position = newPosition;
+
+        Debug.DrawRay(currentPos, moveDirection * detectionDistance, Color.green);
+        
     }
    
    

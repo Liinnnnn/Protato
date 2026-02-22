@@ -12,6 +12,7 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
     [SerializeField] private PlayerWeapon playerWeapon;
     [SerializeField] private ShopUIManager shopUIManager;
     [SerializeField] private InventoryItemInfo inventoryItemInfo;
+    [SerializeField] private InventoryItemInfo inventoryItemInfoPause;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,7 +60,7 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
             InventoryItemContainer w = Instantiate(inventoryItemContainer,inventoryItemsParent);
             InventoryItemContainer p = Instantiate(inventoryItemContainer,inventoryItemsPause);
             w.Configure(wData[i],i,()=>ShowItemInfo(w));
-            p.Configure(wData[i],i,null);
+            p.Configure(wData[i],i,()=>ShowPauseItemInfo(w));
             
         }
         for (int i = 0; i < oData.Length; i++)
@@ -68,10 +69,20 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
             inventoryItem.Configure(oData[i],()=>ShowItemInfo(inventoryItem));
 
             InventoryItemContainer p = Instantiate(inventoryItemContainer,inventoryItemsPause);
-            p.Configure(oData[i],()=>ShowItemInfo(inventoryItem));
+            p.Configure(oData[i],()=>ShowPauseItemInfo(inventoryItem));
 
         }
     }
+
+    private void ShowPauseItemInfo(InventoryItemContainer i)
+    {
+        if(i.weapon == null)
+        {
+            showPauseRelic(i.objectDataSO);
+        }else showPauseWeapon(i.weapon,i.Index);
+    }
+
+   
     private void ShowItemInfo(InventoryItemContainer i)
     {
         if(i.weapon == null)
@@ -86,6 +97,11 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
         inventoryItemInfo.recycle.onClick.RemoveAllListeners();
         inventoryItemInfo.recycle.onClick.AddListener(()=>RecycleObj(objectDataSO));
         shopUIManager.showInventoryItem();
+    }
+    private void showPauseRelic(ObjectDataSO objectDataSO)
+    {
+        shopUIManager.showInventoryInPause();
+        inventoryItemInfoPause.Configure(objectDataSO);
     }
 
     private void RecycleObj(ObjectDataSO objectDataSO)
@@ -102,7 +118,11 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
         inventoryItemInfo.recycle.onClick.RemoveAllListeners();
         inventoryItemInfo.recycle.onClick.AddListener(()=>RecycleWeapon(index));
     }
-
+    private void showPauseWeapon(Weapon weaponDataSO,int index)
+    {
+        shopUIManager.showInventoryInPause();
+        inventoryItemInfoPause.Configure(weaponDataSO);
+    }
     private void RecycleWeapon(int index)
     {
         playerWeapon.Recyle(index);

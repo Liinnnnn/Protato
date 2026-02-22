@@ -167,6 +167,11 @@ MonoBehaviour:
   damage: 10
   attackRate: 2
   animator: {fileID: 1159215024170040456}
+  detectionDistance: 1.5
+  obstacleAvoidanceWeight: 2
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &6781168825109306948
 MonoBehaviour:
   m_ObjectHideFlags: 0

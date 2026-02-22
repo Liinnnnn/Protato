@@ -11,7 +11,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float damage = 10.0f;
     [SerializeField] private float attackRate;
     [SerializeField] private Animator animator;
-    
+    public float detectionDistance = 2.5f; 
+    public float obstacleAvoidanceWeight = 2.0f; // Độ ưu tiên né vật cản
+    public LayerMask obstacleLayer;
     private float attackDelay;
     private float attackTimer;
 
@@ -67,15 +69,35 @@ public class EnemyController : MonoBehaviour
     }
     private void MoveTowardsPlayer()
     {
-        Vector2 direction = (player.getCenter() - (Vector2)transform.position).normalized;
-        Vector2 newPosition = Vector2.MoveTowards(transform.position, player.getCenter(), speed * Time.deltaTime);
-        if (direction.x > 0) {
-            transform.localScale = new Vector3(Math.Abs(transform.localScale.x),transform.localScale.y);
-        } 
-        else if (direction.x < 0) {
-            transform.localScale = new Vector3(-Math.Abs(transform.localScale.x),transform.localScale.y);
+        Vector2 targetPos = player.getCenter();
+        Vector2 currentPos = transform.position;
+        
+        Vector2 moveDirection = (targetPos - currentPos).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(currentPos, moveDirection, detectionDistance, obstacleLayer);
+        
+        if (hit.collider != null) {
+            Vector2 avoidDirection = Vector2.Perpendicular(hit.normal); 
+            
+            if (Vector2.Dot(avoidDirection, moveDirection) < 0) {
+                avoidDirection = -avoidDirection;
+            }
+
+            moveDirection = (moveDirection + avoidDirection * obstacleAvoidanceWeight).normalized;
         }
+
+        Vector2 newPosition = (Vector2)transform.position + (moveDirection * speed * Time.deltaTime);
+
+        if (moveDirection.x > 0) {
+            transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y);
+        } 
+        else if (moveDirection.x < 0) {
+            transform.localScale = new Vector3(-Math.Abs(transform.localScale.x), transform.localScale.y);
+        }
+
         transform.position = newPosition;
+
+        Debug.DrawRay(currentPos, moveDirection * detectionDistance, Color.green);
     }   
 
     void OnDrawGizmos()

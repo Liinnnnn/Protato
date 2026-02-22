@@ -43,7 +43,7 @@ public class ShopItemContainer : MonoBehaviour
         Dictionary<Stats,float> calc = WeaponStatsCalculated.GetStats(w,level);
         configureStatsContainer(calc);
         icon.sprite =w.Sprite;
-        ItemName.text = w.WeaponName + " " + level;
+        ItemName.text = w.WeaponName + " LV." + (level +1);
         priceText.text = WeaponStatsCalculated.GetPrice(w,level).ToString();
         Color imgColor = ColorHolder.getColor(level);
         ItemName.color = imgColor;

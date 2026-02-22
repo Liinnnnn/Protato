@@ -16,12 +16,10 @@ public class WeaponMerge : MonoBehaviour
     {
         Weapon[] weapons = playerWeapon.GetWeapons();
 
-        // Vòng lặp 1: Chọn vũ khí thứ nhất (A)
         for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i] == null || weapons[i].Level >= 3) continue;
 
-            // Vòng lặp 2: Quét các vũ khí phía sau (B) để tìm cặp với (A)
             for (int j = i + 1; j < weapons.Length; j++)
             {
                 if (weapons[j] == null) continue;

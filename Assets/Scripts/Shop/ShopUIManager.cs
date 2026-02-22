@@ -8,6 +8,8 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private GameObject PlayerView;
     [SerializeField] private GameObject InventoryView;
     [SerializeField] private GameObject InventoryItemView;
+    [SerializeField] private GameObject InventoryItemViewInPause;
+
     void Start()
     {
         hideInventory();
@@ -27,7 +29,10 @@ public class ShopUIManager : MonoBehaviour
     {
         InventoryView.SetActive(true);
     }
-
+    public void showInventoryInPause()
+    {
+        InventoryItemViewInPause.SetActive(true);
+    }   
     public void hideInventory()
     {
         InventoryView.SetActive(false);

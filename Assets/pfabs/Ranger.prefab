@@ -109,7 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92879b39092ff294ea8b41b9dee88afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangeEnemy
-  speed: 1
+  speed: 0.8
+  detectionDistance: 1.5
+  obstacleAvoidanceWeight: 2
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
   rangePlayerDetectionRange: 5.66
   projectile: {fileID: 2474514012140219492, guid: 92f8032569927974cbf6581350b27125, type: 3}
 --- !u!114 &5840537371955902094
