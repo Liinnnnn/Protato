@@ -8,6 +8,7 @@ public class RangedAttack : MonoBehaviour
     private Player player;
     [SerializeField] private float damage = 10.0f;
     [SerializeField] private float attackRate;
+
     private float attackDelay;
     private float attackTimer;
     [Header("Projectile Settings")]

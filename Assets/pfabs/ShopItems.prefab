@@ -217,8 +217,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.9, y: -13.1}
-  m_SizeDelta: {x: 64, y: 64}
+  m_AnchoredPosition: {x: 16.400002, y: -0.29999924}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4185904955224484778
 CanvasRenderer:
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7871530612760024436, guid: 0a218e33bd5acc9408b3c776610aed35, type: 3}
+  m_Sprite: {fileID: -5120360227030548683, guid: aea79e8e9b8210448ba09743bb38e052, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -852,8 +852,8 @@ MonoBehaviour:
   statsContainerP: {fileID: 5257607623069600615}
   levelImage: {fileID: 2280782093323326250}
   locked: {fileID: 8271603678004492112}
-  Locked: {fileID: 4727633781103762509, guid: 0a218e33bd5acc9408b3c776610aed35, type: 3}
-  unlocked: {fileID: -7871530612760024436, guid: 0a218e33bd5acc9408b3c776610aed35, type: 3}
+  Locked: {fileID: 2860044062972993909, guid: b0499389d48a2a14e9a1c477b6c4e7bc, type: 3}
+  unlocked: {fileID: -5120360227030548683, guid: aea79e8e9b8210448ba09743bb38e052, type: 3}
 --- !u!1 &4071035814533473700
 GameObject:
   m_ObjectHideFlags: 0

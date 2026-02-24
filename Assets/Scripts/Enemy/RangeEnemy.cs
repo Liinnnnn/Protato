@@ -8,13 +8,14 @@ public class RangeEnemy : MonoBehaviour
     private RangedAttack rangedAttack;
     [Header("General Settings")]
     [SerializeField] private float speed = 3.0f;
+    [SerializeField] private Animator animator;
     public float detectionDistance = 1.5f; 
     public float obstacleAvoidanceWeight = 2.0f; // Độ ưu tiên né vật cản
     public LayerMask obstacleLayer;
 
     [Header("Ranged Enemy Settings")]
     [SerializeField] private float rangePlayerDetectionRange = 10f;
-    [SerializeField] private Bullet projectile;
+    // [SerializeField] private Bullet projectile;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,11 +44,13 @@ public class RangeEnemy : MonoBehaviour
     }
     private void TryAttackPlayer()
     {
-        rangedAttack.AimTowardsPlayer();   
+        animator.SetBool("Move",false);
+        rangedAttack.AimTowardsPlayer();
     }
    
     private void MoveTowardsPlayer()
     {
+        animator.SetBool("Move",true);
         Vector2 targetPos = player.getCenter();
         Vector2 currentPos = transform.position;
         

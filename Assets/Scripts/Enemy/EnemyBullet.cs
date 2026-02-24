@@ -31,7 +31,7 @@ public class EnemyBullet : MonoBehaviour
     public void Shoot(float damage,Vector2 dir)
     {
         this.damage = damage;
-        transform.up = dir;
+        transform.right = dir;
         rb.linearVelocity = dir * speed;
     }
     public void Configure(RangedAttack rangedAttack)

@@ -578,7 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9ae249a7543e144aa6133403c9a6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
-  <objects>k__BackingField: []
+  <objects>k__BackingField:
+  - {fileID: 11400000, guid: 367f22535e1770146a1bd2d406252215, type: 2}
 --- !u!114 &61026803453470865
 MonoBehaviour:
   m_ObjectHideFlags: 0
