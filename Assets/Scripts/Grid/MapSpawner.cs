@@ -20,7 +20,7 @@ public class MapSpawner : MonoBehaviour
     }
     private void genMapChunk(int x,int y)
     {
-        Vector3 spawnPos = new Vector3(x * 20 ,y * 10) ;
+        Vector3 spawnPos = new Vector3(x * 33.8f ,y * 15.8f) ;
         Instantiate(mapChunkPrefs,spawnPos,Quaternion.identity,transform);
     }
 }

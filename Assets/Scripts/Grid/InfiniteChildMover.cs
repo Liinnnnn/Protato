@@ -24,8 +24,8 @@ public class InfiniteChildMover : MonoBehaviour
 
             Vector3 dist = playerTransform.position - child.position;
 
-            float xThreshold = distThreshold * 20;
-            float yThreshold = distThreshold * 10;
+            float xThreshold = distThreshold * 33.8f;
+            float yThreshold = distThreshold * 15.8f;
             if(Math.Abs(dist.x) > xThreshold)
             {
                 child.position += Vector3.right * xThreshold* 2 *Math.Sign(dist.x);

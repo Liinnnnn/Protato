@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 public enum BGMMusic
@@ -17,6 +18,8 @@ public class AudioManager : MonoBehaviour,IGameStateListener
     public static AudioManager instance;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixer audioMixer;
+    private BGMMusic lastMusicType; 
+    private float gameMusicTimestamp = 0f;
     public bool isSfxOn {get;private set;}
     public bool isMusicOn {get;private set;}
     void Awake()
@@ -31,11 +34,36 @@ public class AudioManager : MonoBehaviour,IGameStateListener
     }
     private void PlayBGM(BGMMusic bGM, float volumn =1, bool loop = true)
     {
+       
+        if (lastMusicType == BGMMusic.GAMEBGM && bGM != BGMMusic.GAMEBGM)
+        {
+            gameMusicTimestamp = audioSource.time;
+        }
         audioSource.Stop();
-        audioSource.PlayOneShot(clips[Array.IndexOf(Enum.GetValues(typeof(BGMMusic)),bGM)]);
-        if (!isMusicOn) return;
-        audioMixer.SetFloat("Music",0f);
+
+        AudioClip nextClip = clips[Array.IndexOf(Enum.GetValues(typeof(BGMMusic)), bGM)];
+        
+        audioSource.clip = nextClip;
+        audioSource.volume = volumn;
         audioSource.loop = loop;
+
+        
+        if (bGM == BGMMusic.GAMEBGM)
+        {
+            audioSource.time = gameMusicTimestamp;
+        }
+        else
+        {
+            // Các state khác (MENU, SHOP...) thì luôn chơi từ đầu (0s)
+            audioSource.time = 0f;
+        }
+
+        audioSource.Play();
+        lastMusicType = bGM; 
+
+        // Mixer logic
+        if (!isMusicOn) return;
+        audioMixer.SetFloat("Music", 0f);
     }
 
     private void SFXChangedCallback(bool obj)

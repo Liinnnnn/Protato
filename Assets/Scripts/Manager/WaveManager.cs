@@ -98,7 +98,7 @@ public class WaveManager : MonoBehaviour,IGameStateListener
     private Vector2 SpawnPosition()
     {
         Vector2 direction = UnityEngine.Random.onUnitSphere;
-        Vector2 offs = direction * UnityEngine.Random.Range(12,15);
+        Vector2 offs = direction * UnityEngine.Random.Range(6,9);
         Vector2 targetPos = (Vector2)Player.transform.position + offs;
         return targetPos;
     }

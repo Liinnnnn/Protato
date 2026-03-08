@@ -25,9 +25,9 @@ public class Enemy : MonoBehaviour
     
     private void Death()
     {
+        onDying?.Invoke(transform.position);  
         deathEffect.Play();
         deathEffect.transform.SetParent(null);
-        onDying?.Invoke(transform.position);  
         Destroy(gameObject);    
     }   
 }

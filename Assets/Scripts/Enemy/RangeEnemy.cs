@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Pool;
 
 public class RangeEnemy : MonoBehaviour
@@ -7,12 +8,8 @@ public class RangeEnemy : MonoBehaviour
     private Player player;
     private RangedAttack rangedAttack;
     [Header("General Settings")]
-    [SerializeField] private float speed = 3.0f;
+    [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
-    public float detectionDistance = 1.5f; 
-    public float obstacleAvoidanceWeight = 2.0f; // Độ ưu tiên né vật cản
-    public LayerMask obstacleLayer;
-
     [Header("Ranged Enemy Settings")]
     [SerializeField] private float rangePlayerDetectionRange = 10f;
     // [SerializeField] private Bullet projectile;
@@ -21,7 +18,9 @@ public class RangeEnemy : MonoBehaviour
     {
         player = FindFirstObjectByType<Player>();
         rangedAttack = GetComponent<RangedAttack>();
-
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.stoppingDistance = rangePlayerDetectionRange;
         if (player == null)
         {
             Destroy(gameObject);
@@ -29,6 +28,7 @@ public class RangeEnemy : MonoBehaviour
     }
     void Update()
     {
+        if(!agent.isOnNavMesh) Destroy(gameObject);
         ManageAttack();
     }
     private void ManageAttack()
@@ -50,34 +50,19 @@ public class RangeEnemy : MonoBehaviour
    
     private void MoveTowardsPlayer()
     {
+        
         animator.SetBool("Move",true);
         Vector2 targetPos = player.getCenter();
         Vector2 currentPos = transform.position;
         
         Vector2 moveDirection = (targetPos - currentPos).normalized;
 
-        RaycastHit2D hit = Physics2D.Raycast(currentPos, moveDirection, detectionDistance, obstacleLayer);
-        
-        if (hit.collider != null) {
-            Vector2 avoidDirection = Vector2.Perpendicular(hit.normal); 
-            
-            if (Vector2.Dot(avoidDirection, moveDirection) < 0) {
-                avoidDirection = -avoidDirection;
-            }
-
-            moveDirection = (moveDirection + avoidDirection * obstacleAvoidanceWeight).normalized;
-        }
-
-        Vector2 newPosition = (Vector2)transform.position + (moveDirection * speed * Time.deltaTime);
+        agent.SetDestination(targetPos);
 
         rangedAttack.Flip(moveDirection);
-
-        transform.position = newPosition;
-
-        Debug.DrawRay(currentPos, moveDirection * detectionDistance, Color.green);
-        
+     
     }
-   
+    
    
     void OnDrawGizmos()
     {

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8756952500154135226}
   - component: {fileID: 2084508617423515397}
   - component: {fileID: 8221024059289571819}
+  - component: {fileID: 6486428532562030485}
   m_Layer: 6
   m_Name: Ranger
   m_TagString: Enemy
@@ -51,13 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92879b39092ff294ea8b41b9dee88afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangeEnemy
-  speed: 0.8
+  agent: {fileID: 6486428532562030485}
   animator: {fileID: 8221024059289571819}
-  detectionDistance: 1.5
-  obstacleAvoidanceWeight: 2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 256
   rangePlayerDetectionRange: 5.66
 --- !u!114 &5840537371955902094
 MonoBehaviour:
@@ -147,6 +143,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &6486428532562030485
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353295922705537074}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.35
+  m_Speed: 0.8
+  m_Acceleration: 1.6
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.51
+  m_BaseOffset: 0.79
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &587050248125079144
 GameObject:
   m_ObjectHideFlags: 0
