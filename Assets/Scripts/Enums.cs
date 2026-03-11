@@ -8,6 +8,12 @@ public enum GameState
     WEAPONCHOSE,
     COMPLETE
 }
+public enum Difficulty
+{
+    EASY,
+    NORMAL,
+    HARD
+}
 public enum Stats
 {
     Attack,

@@ -20,8 +20,6 @@ public class CurrencyManager : MonoBehaviour
         // Diamond.onCollected += CollectDiamond;
     }
 
-    
-
     void Awake()
     {
         instance = this;
@@ -36,7 +34,7 @@ public class CurrencyManager : MonoBehaviour
     [Button]
     private void Add5000()
     {
-        AddCurrency(1000);
+        AddCurrency(5000);
     }
     // [Button]
     // private void Add5000Diamond()
