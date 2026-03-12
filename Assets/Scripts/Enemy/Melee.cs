@@ -21,12 +21,26 @@ public class Melee : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         player = FindFirstObjectByType<Player>();
+        attackDelay = 1f / attackRate;
+
         if (player == null)
         {
             Debug.LogError("Player not found in the scene.");
             Destroy(gameObject);
         }
-        attackDelay = 1f / attackRate;
+        
+        switch (GameManager.instance.currentDiff)
+        {
+            case Difficulty.EASY :
+                damage *= 1f;
+                break;
+            case Difficulty.NORMAL :
+                damage *= 1.5f;
+                break;
+            case Difficulty.HARD :
+                damage *= 2f;
+                break;
+        }
     }
     void Awake()
     {

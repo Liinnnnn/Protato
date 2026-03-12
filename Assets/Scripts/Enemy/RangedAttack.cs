@@ -21,8 +21,19 @@ public class RangedAttack : MonoBehaviour
     {
         player = FindFirstObjectByType<Player>();
         attackDelay = 1f / attackRate;
+        switch (GameManager.instance.currentDiff)
+        {
+            case Difficulty.EASY :
+                damage *= 1f;
+                break;
+            case Difficulty.NORMAL :
+                damage *= 1.5f;
+                break;
+            case Difficulty.HARD :
+                damage *= 2f;
+                break;
+        }
         bulletPool = new ObjectPool<EnemyBullet>(createFunc,actionOnGet,actionOnRelease,actionOnDestroy);
-
     }
     private EnemyBullet createFunc()
     {
