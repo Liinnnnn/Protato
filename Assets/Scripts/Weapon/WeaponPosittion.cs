@@ -5,12 +5,14 @@ public class WeaponPosition : MonoBehaviour
     [field: SerializeField] public Weapon weapon{get ; private set;}
     public void assignWeapon(Weapon w,int lv)
     {
-        w.UpgradeTo(lv);
-        
-        weapon = w;
-        Instantiate(w,transform);
+        Weapon clone = Instantiate(w,transform);
+    
+        weapon = clone;
 
-        w.transform.localRotation = Quaternion.identity;
+        weapon.UpgradeTo(lv);
+        
+
+        weapon.transform.localRotation = Quaternion.identity;
     }
     public void removeWeapon()
     {

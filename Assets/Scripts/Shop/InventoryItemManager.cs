@@ -22,8 +22,6 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
         GameManager.onPaused += Configure;
     }
 
-
-
     // Update is called once per frame
     void OnDestroy()
     {
@@ -55,11 +53,11 @@ public class InventoryItemManager : MonoBehaviour,IGameStateListener
        
         for (int i = 0; i < wData.Length; i++)
         {
-            if(wData[i] ==null )
+            if(wData[i] == null )
                 continue;
             InventoryItemContainer w = Instantiate(inventoryItemContainer,inventoryItemsParent);
-            InventoryItemContainer p = Instantiate(inventoryItemContainer,inventoryItemsPause);
             w.Configure(wData[i],i,()=>ShowItemInfo(w));
+            InventoryItemContainer p = Instantiate(inventoryItemContainer,inventoryItemsPause);
             p.Configure(wData[i],i,()=>ShowPauseItemInfo(w));
             
         }

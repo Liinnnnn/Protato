@@ -36,8 +36,6 @@ public class InventoryItemInfo : MonoBehaviour
     }
     public void Configure(ObjectDataSO w)
     {
-        
-        // merge.gameObject.SetActive(false);
         configure(w.icon,
         w.name,
         w.sellPrice,

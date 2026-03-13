@@ -107,10 +107,9 @@ public class ShopManager : MonoBehaviour,IGameStateListener
         {
             int price = WeaponStatsCalculated.GetPrice(s.weaponData,lv);
             CurrencyManager.instance.UseCoin(price);
-
+            onItemPurchase?.Invoke();
             Destroy(s.gameObject);
         }
-        onItemPurchase?.Invoke();
     }
 
     private void CurrencyManagerCallback()

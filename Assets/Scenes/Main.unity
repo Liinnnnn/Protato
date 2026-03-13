@@ -9284,7 +9284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &988000216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20007,7 +20007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd4e0e8bdac08b4eac0267d1f2fb620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  waveDuration: 100
+  waveDuration: 5
   Player: {fileID: 2055282310}
   waves:
   - name: 1
@@ -20364,6 +20364,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1269199209}
+    - target: {fileID: 8999614804908678034, guid: bdba1722a3e25e4449a9c8e907cf47f7, type: 3}
+      propertyPath: <objects>k__BackingField.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9193726819585123137, guid: bdba1722a3e25e4449a9c8e907cf47f7, type: 3}
       propertyPath: lv
       value: 

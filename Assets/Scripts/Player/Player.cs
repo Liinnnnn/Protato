@@ -92,7 +92,7 @@ public class Player : MonoBehaviour,IPlayerStats
     private void changeHealthBar()
     {
         healthBar.value = health / MaxHealth;
-        hpText.text = health.ToString() + " / " + MaxHealth.ToString();
+        hpText.text = health.ToString("F1") + " / " + MaxHealth.ToString();
     }   
     private void Die()
     {

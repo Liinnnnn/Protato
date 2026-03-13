@@ -47,7 +47,6 @@ public class CurrencyManager : MonoBehaviour
         UpdateText();
         spent?.Invoke();
     }
-
     private void UpdateText()
     {
         CurrencyText[] text = FindObjectsByType<CurrencyText>(FindObjectsInactive.Include,FindObjectsSortMode.None);

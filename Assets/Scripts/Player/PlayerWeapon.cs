@@ -14,6 +14,7 @@ public class PlayerWeapon : MonoBehaviour
                 continue;
             }
             WParents[i].assignWeapon(w.weapon,lv);
+            Debug.Log($"Gán vũ khí vào vị trí index: {i}, Tên Object: {WParents[i].gameObject.name}");
             return true;
         }
         return false;

@@ -7,7 +7,7 @@ using System;
 
 public class ShopItemContainer : MonoBehaviour
 {
-     [Header("Settings")]
+    [Header("Settings")]
     [SerializeField] private Image icon ;
     [SerializeField] private TextMeshProUGUI ItemName ;
     [SerializeField] private TextMeshProUGUI priceText ;
@@ -38,11 +38,10 @@ public class ShopItemContainer : MonoBehaviour
     }
     public void Configure(WeaponDataSO w,int level)
     {
-        PurchaseButton.interactable = CurrencyManager.instance.HasEnough(w.price);
         PurchaseButton.onClick.AddListener(()=>Purchase());
         Dictionary<Stats,float> calc = WeaponStatsCalculated.GetStats(w,level);
         configureStatsContainer(calc);
-        icon.sprite =w.Sprite;
+        icon.sprite = w.Sprite;
         ItemName.text = w.WeaponName + " LV." + (level +1);
         priceText.text = WeaponStatsCalculated.GetPrice(w,level).ToString();
         Color imgColor = ColorHolder.getColor(level);
@@ -51,11 +50,11 @@ public class ShopItemContainer : MonoBehaviour
         weaponLV = level;
         weaponData = w;
         itemPrice = WeaponStatsCalculated.GetPrice(w,level);
+        PurchaseButton.interactable = CurrencyManager.instance.HasEnough(itemPrice);
     }
     public void Configure(ObjectDataSO w)
     {
         int buyPrice = w.sellPrice * 2;
-        PurchaseButton.interactable = CurrencyManager.instance.HasEnough(buyPrice);
         configureStatsContainer(w.BaseStat);
         PurchaseButton.onClick.AddListener(()=>Purchase());
         
@@ -69,6 +68,7 @@ public class ShopItemContainer : MonoBehaviour
         objectData = w;
         Debug.Log(w);
         itemPrice = buyPrice;
+        PurchaseButton.interactable = CurrencyManager.instance.HasEnough(buyPrice);
     }
     private void configureStatsContainer(Dictionary<Stats,float> calc)
     {
