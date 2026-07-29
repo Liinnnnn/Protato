@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour,IPlayerStats
     public DynamicJoystick joystick;
     private float speed;
     [SerializeField] private float BaseSpeed;
-    
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,12 +28,12 @@ public class PlayerController : MonoBehaviour,IPlayerStats
     {
         if (horizontalInput > 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            spriteRenderer.flipX = false;
         }
         else if (horizontalInput < 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
+            spriteRenderer.flipX = true;
+        }            
     }
 
     public void updateStat(PlayerStatsManager playerStatsManager)

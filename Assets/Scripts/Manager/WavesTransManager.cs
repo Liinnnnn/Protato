@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
@@ -13,23 +14,12 @@ public class WavesTransManager : MonoBehaviour,IGameStateListener
     [SerializeField] private PlayerStatsManager statsManager;
     [SerializeField] private PlayerObject playerObject;
     [SerializeField] private TextMeshProUGUI title;
+    [SerializeField] private RectTransform statsTransform;
     [Header("Chest Related")]
     private int chestCollected;
     [SerializeField] private ChestContainerUI chestContainer;
     [SerializeField] private Transform chestContainerParent;
     public static WavesTransManager instance;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Awake()
     {
         instance = this;
@@ -46,6 +36,7 @@ public class WavesTransManager : MonoBehaviour,IGameStateListener
         {
             case GameState.WAVETRANS :
                 TryOpenChest();
+                OpenStats();
                 break;
         }    
     }
@@ -146,6 +137,12 @@ public class WavesTransManager : MonoBehaviour,IGameStateListener
     {
         return chestCollected > 0;
     }
+    private void OpenStats()
+    {
+        statsTransform.DOKill();
+        statsTransform.anchoredPosition = new Vector2(-1000f,0);
+        statsTransform.DOAnchorPosX(0,0.4f).SetEase(Ease.OutSine).SetUpdate(true);
+    }
     private void TryOpenChest()
     {
         if(HasCollectedChest())
@@ -179,11 +176,10 @@ public class WavesTransManager : MonoBehaviour,IGameStateListener
 
         ChestContainerUI chestContainerUI = Instantiate(chestContainer,chestContainerParent);
         chestContainerUI.Configure(randomObj);
-
         chestContainerUI.TakeButton.onClick.RemoveAllListeners();
-        
         chestContainerUI.TakeButton.onClick.AddListener(()=> TakeButtonCallback(randomObj));
         chestContainerUI.RecycleButton.onClick.AddListener(()=> RecycleButtonCallback(randomObj));
+
     }
 
     private void RecycleButtonCallback(ObjectDataSO randomObj)

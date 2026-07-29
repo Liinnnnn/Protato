@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class WaveManager : MonoBehaviour,IGameStateListener
     [SerializeField] private float waveDuration;
     [SerializeField] private Player Player;
     [SerializeField] private Wave[] waves;
+    [SerializeField] private TextMeshProUGUI timeLeft;
     private List<float> localCounter = new List<float>();
     private float timer;
     private bool isTimerOn;
@@ -38,6 +40,7 @@ public class WaveManager : MonoBehaviour,IGameStateListener
         if(!isTimerOn) return;
         if(timer < waveDuration)
         {
+            timeLeft.text = Mathf.FloorToInt(waveDuration - timer).ToString();
             ManageCurrentWave();
         }else
         {

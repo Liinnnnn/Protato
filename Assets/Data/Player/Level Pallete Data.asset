@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level Pallete Data
   m_EditorClassIdentifier: Assembly-CSharp::PalleteSO
   <lvColor>k__BackingField:
-  - {r: 0.52848876, g: 0.52848876, b: 0.52848876, a: 1}
-  - {r: 0.17825413, g: 0.7885299, b: 0.10083107, a: 1}
+  - {r: 0.6809266, g: 0.6809266, b: 0.6809266, a: 1}
+  - {r: 0.17321084, g: 0.770596, b: 0.09853783, a: 1}
   - {r: 0.1949839, g: 0.33233616, b: 0.9768354, a: 1}
-  - {r: 1, g: 0.72564787, b: 0.18167388, a: 1}
+  - {r: 0.9589016, g: 0.6096838, b: 0.12261688, a: 1}
   <lvOulineColor>k__BackingField:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0.5529412, g: 1, b: 0.49411765, a: 0.5372549}

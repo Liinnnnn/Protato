@@ -1,12 +1,12 @@
-using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
-
+using DG.Tweening;
 public class ShopUIManager : MonoBehaviour
 {
     [Header("Player Stats")]
     [SerializeField] private GameObject PlayerView;
-    [SerializeField] private GameObject InventoryView;
+    [SerializeField] private GameObject Inventory;
+    [SerializeField] private RectTransform InventorySlideTranform;
     [SerializeField] private GameObject InventoryItemView;
     [SerializeField] private GameObject InventoryItemViewInPause;
 
@@ -27,7 +27,10 @@ public class ShopUIManager : MonoBehaviour
     }
     public void showInventory()
     {
-        InventoryView.SetActive(true);
+        Inventory.SetActive(true);
+        InventorySlideTranform.DOKill();
+        InventorySlideTranform.anchoredPosition = new Vector2(1000f,0);
+        InventorySlideTranform.DOAnchorPosX(-250f,0.2f).SetUpdate(true).SetEase(Ease.InOutSine);
     }
     public void showInventoryInPause()
     {
@@ -35,7 +38,7 @@ public class ShopUIManager : MonoBehaviour
     }   
     public void hideInventory()
     {
-        InventoryView.SetActive(false);
+        Inventory.SetActive(false);
     }
     [Button]
     public void showInventoryItem()
