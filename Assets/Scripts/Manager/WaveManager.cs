@@ -75,7 +75,7 @@ public class WaveManager : MonoBehaviour,IGameStateListener
             float spawnDelay = 1f / segments.spawnRate;
             if(timeSinceStartSpawn / spawnDelay > localCounter[i]) 
             {
-                Instantiate(segments.enemy,SpawnPosition(),Quaternion.identity,transform);
+                EnemyPoolManager.Instance.Spawn(segments.enemy,SpawnPosition(),Quaternion.identity,transform);
                 localCounter[i]++;
             }
 
@@ -100,8 +100,8 @@ public class WaveManager : MonoBehaviour,IGameStateListener
     
     private Vector2 SpawnPosition()
     {
-        Vector2 direction = UnityEngine.Random.onUnitSphere;
-        Vector2 offs = direction * UnityEngine.Random.Range(6,9);
+        Vector2 direction = UnityEngine.Random.insideUnitCircle.normalized;
+        Vector2 offs = direction * UnityEngine.Random.Range(9f,12f);
         Vector2 targetPos = (Vector2)Player.transform.position + offs;
         return targetPos;
     }
@@ -124,7 +124,7 @@ public class WaveManager : MonoBehaviour,IGameStateListener
                 {
                     foreach (GameObject obj in e)
                     {
-                        Destroy(obj);
+                        EnemyPoolManager.Instance.Despawn(obj);
                     }
                 }
                 break;

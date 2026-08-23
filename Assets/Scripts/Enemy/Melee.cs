@@ -26,7 +26,7 @@ public class Melee : MonoBehaviour
         if (player == null)
         {
             Debug.LogError("Player not found in the scene.");
-            Destroy(gameObject);
+            EnemyPoolManager.Instance.Despawn(gameObject);
         }
         
         switch (GameManager.instance.currentDiff)
@@ -50,7 +50,7 @@ public class Melee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(!agent.isOnNavMesh) Destroy(gameObject);  
+        if(!agent.isOnNavMesh) EnemyPoolManager.Instance.Despawn(gameObject);  
         MoveTowardsPlayer();
         if (attackTimer >= attackDelay)
         {

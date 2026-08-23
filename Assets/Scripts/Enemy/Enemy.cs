@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,20 +9,30 @@ public class Enemy : MonoBehaviour
     private float health;
     public static event Action<Vector2> onDying;
     public static event Action<float,Vector2> onTakeDamage;
-    void Start()
+    void OnEnable()
     {
-        switch (GameManager.instance.currentDiff)
+        ResetHealth();
+    }
+
+    private void ResetHealth()
+    {
+        float rate = 1f;
+        if (GameManager.instance != null)
         {
-            case Difficulty.EASY :
-                setMaxHealthByRate(1f);
-                break;
-            case Difficulty.NORMAL :
-                setMaxHealthByRate(1.5f);
-                break;
-            case Difficulty.HARD :
-                setMaxHealthByRate(2f);
-                break;
+            switch (GameManager.instance.currentDiff)
+            {
+                case Difficulty.EASY :
+                    setMaxHealthByRate(1f);
+                    break;
+                case Difficulty.NORMAL :
+                    setMaxHealthByRate(1.5f);
+                    break;
+                case Difficulty.HARD :
+                    setMaxHealthByRate(2f);
+                    break;
+            }
         }
+        health = MaxHealth * rate;
     }
     public void TakeDamage(float damage)
     {
@@ -40,10 +51,14 @@ public class Enemy : MonoBehaviour
 
     private void Death()
     {
-        onDying?.Invoke(transform.position);  
-        deathEffect.Play();
-        deathEffect.transform.SetParent(null);
-        Destroy(gameObject);    
+        StartCoroutine(waitDeath());
     }
-
+    private IEnumerator waitDeath()
+    {
+        onDying?.Invoke(transform.position);  
+        deathEffect.gameObject.SetActive(true);
+        deathEffect.Play();
+        yield return new WaitForEndOfFrame();
+        EnemyPoolManager.Instance.Despawn(gameObject);
+    }
 }

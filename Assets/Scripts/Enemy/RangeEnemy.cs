@@ -23,12 +23,12 @@ public class RangeEnemy : MonoBehaviour
         agent.stoppingDistance = rangePlayerDetectionRange;
         if (player == null)
         {
-            Destroy(gameObject);
+            EnemyPoolManager.Instance.Despawn(gameObject);
         }
     }
     void Update()
     {
-        if(!agent.isOnNavMesh) Destroy(gameObject);
+        if(!agent.isOnNavMesh) EnemyPoolManager.Instance.Despawn(gameObject);
         ManageAttack();
     }
     private void ManageAttack()
