@@ -48,6 +48,9 @@ public class RangeEnemy : MonoBehaviour
         rangedAttack.AimTowardsPlayer();
     }
    
+    private float pathUpdateDelay = 0.2f;
+    private float pathUpdateTimer;
+
     private void MoveTowardsPlayer()
     {
         
@@ -57,13 +60,17 @@ public class RangeEnemy : MonoBehaviour
         
         Vector2 moveDirection = (targetPos - currentPos).normalized;
 
-        agent.SetDestination(targetPos);
+        pathUpdateTimer += Time.deltaTime;
+        if (pathUpdateTimer >= pathUpdateDelay)
+        {
+            agent.SetDestination(targetPos);
+            pathUpdateTimer = 0f;
+        }
 
         rangedAttack.Flip(moveDirection);
      
     }
-    
-   
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.beige;

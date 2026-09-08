@@ -71,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 1354691173799569958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.624, y: 0.581, z: 0}
+  m_LocalPosition: {x: -1.24, y: 0.581, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 4161724134670555053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.726, y: 0.101, z: 0}
+  m_LocalPosition: {x: 1.26, y: 0.498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 5362195768367547764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57, y: 0.039, z: 0}
+  m_LocalPosition: {x: -0.645, y: 0.039, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -520,6 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   joystick: {fileID: 0}
   BaseSpeed: 5
+  spriteRenderer: {fileID: 0}
 --- !u!114 &3306982968127233632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 7104815793451387629}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.694, y: 0.597, z: 0}
+  m_LocalPosition: {x: 0.639, y: 0.043, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

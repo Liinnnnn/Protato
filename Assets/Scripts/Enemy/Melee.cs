@@ -79,9 +79,13 @@ public class Melee : MonoBehaviour
     {
         animator.SetBool("Move",false);
         player.TakeDamage(damage);   
+        SFXManager.instance.PlayEnemyHitSFX();
         attackTimer = 0f;
        
     }
+    private float pathUpdateDelay = 0.2f;
+    private float pathUpdateTimer;
+
     private void MoveTowardsPlayer()
     {
         animator.SetBool("Move",true);
@@ -90,7 +94,12 @@ public class Melee : MonoBehaviour
         
         Vector2 moveDirection = (targetPos - currentPos).normalized;
 
-        agent.SetDestination(targetPos);
+        pathUpdateTimer += Time.deltaTime;
+        if (pathUpdateTimer >= pathUpdateDelay)
+        {
+            agent.SetDestination(targetPos);
+            pathUpdateTimer = 0f;
+        }
 
         if (moveDirection.x > 0) {
             transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y);
@@ -98,7 +107,7 @@ public class Melee : MonoBehaviour
         else if (moveDirection.x < 0) {
             transform.localScale = new Vector3(-Math.Abs(transform.localScale.x), transform.localScale.y);
         }
-}   
+    }   
 
     void OnDrawGizmos()
     {

@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class SFXManager : MonoBehaviour
 {
-    public AudioClip clips;
+    [SerializeField] private AudioClip buttons;
+    [SerializeField] private AudioClip enemyShoot;
+    [SerializeField] private AudioClip enemyHit;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioMixer audioMixer;
+    public static SFXManager instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,17 +19,29 @@ public class SFXManager : MonoBehaviour
             button[i].onClick.AddListener(()=>PlaySFX());
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        instance = this;
     }
     private void PlaySFX()
     {
         if(!AudioManager.instance.isSfxOn) return;
-        audioSource.PlayOneShot(clips);
-        audioSource.pitch = Random.Range(0.9f, 1.2f);
+        audioSource.PlayOneShot(buttons);
+        audioSource.pitch = Random.Range(0.7f, 1f);
+        audioMixer.SetFloat("SFX",0f);
+    }
+    public void PlayEnemyShootSFX()
+    {
+        if(!AudioManager.instance.isSfxOn) return;
+        audioSource.PlayOneShot(enemyShoot);
+        audioSource.pitch = Random.Range(0.7f, 1f);
+        audioMixer.SetFloat("SFX",0f);
+    }
+    public void PlayEnemyHitSFX()
+    {
+        if(!AudioManager.instance.isSfxOn) return;
+        audioSource.PlayOneShot(enemyHit);
+        audioSource.pitch = Random.Range(0.7f, 1f);
         audioMixer.SetFloat("SFX",0f);
     }
 }

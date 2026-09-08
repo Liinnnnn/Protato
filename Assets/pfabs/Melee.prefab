@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   playerDetectionRange: 0.68
   damage: 10
-  attackRate: 2
+  attackRate: 1
   animator: {fileID: 1159215024170040456}
   agent: {fileID: 5178847173976222577}
 --- !u!114 &6781168825109306948

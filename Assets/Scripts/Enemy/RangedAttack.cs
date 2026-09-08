@@ -81,6 +81,7 @@ public class RangedAttack : MonoBehaviour
         Flip(direction);       
         EnemyBullet bullet = bulletPool.Get();
         bullet.Shoot(damage, direction);
+        SFXManager.instance.PlayEnemyShootSFX();
         gizmoDirection = direction;
     }
     public void Flip(Vector2 direction)

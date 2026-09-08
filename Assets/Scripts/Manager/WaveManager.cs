@@ -101,7 +101,14 @@ public class WaveManager : MonoBehaviour,IGameStateListener
     private Vector2 SpawnPosition()
     {
         Vector2 direction = UnityEngine.Random.insideUnitCircle.normalized;
-        Vector2 offs = direction * UnityEngine.Random.Range(9f,12f);
+        
+        Camera cam = Camera.main;
+        float height = cam.orthographicSize;
+        float width = height * cam.aspect;
+        // Calculate the distance to the corner of the screen, plus a 2 unit buffer
+        float spawnRadius = Mathf.Sqrt(width * width + height * height) + 2f; 
+        
+        Vector2 offs = direction * spawnRadius;
         Vector2 targetPos = (Vector2)Player.transform.position + offs;
         return targetPos;
     }
